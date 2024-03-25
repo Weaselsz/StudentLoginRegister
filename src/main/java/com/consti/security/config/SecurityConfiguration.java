@@ -1,7 +1,6 @@
 package com.consti.security.config;
 
 
-import com.consti.security.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
