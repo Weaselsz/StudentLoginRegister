@@ -1,6 +1,6 @@
 package com.consti.security.config;
 
-import com.consti.security.user.UserRepository;
+import com.consti.security.user.StudentRepository;
 
 
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class ApplicationConfig {
 
-    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
     @Bean
 
     public UserDetailsService userDetailsService(){
-        return username -> userRepository.findByEmail(username).orElseThrow(
+        return username -> studentRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("User not found"));
     }
 

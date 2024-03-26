@@ -2,8 +2,8 @@ package com.consti.security.Auth;
 
 import com.consti.security.config.JwtService;
 import com.consti.security.user.Role;
-import com.consti.security.user.User;
-import com.consti.security.user.UserRepository;
+import com.consti.security.user.Student;
+import com.consti.security.user.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,7 @@ public class AuthenticationService {
 
     private final JwtService jwtService;
     private final PasswordEncoder pwEncoder;
-    private final UserRepository repository;
+    private final StudentRepository repository;
 
     private final AuthenticationManager authenticationManager;
 
@@ -24,16 +24,17 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
 
-        var user = User.builder()
+        var student = Student.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(pwEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .dob(request.getDob())
+                .role(Role.STUDENT)
                 .build();
 
-        repository.save(user);
-        var jwtToken = jwtService.generateToken(null, user);
+        repository.save(student);
+        var jwtToken = jwtService.generateToken(null, student);
 
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
@@ -45,9 +46,9 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail()).orElseThrow();
+        var student = repository.findByEmail(request.getEmail()).orElseThrow();
 
-        var jwtToken = jwtService.generateToken(null, user);
+        var jwtToken = jwtService.generateToken(null, student);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
 }
