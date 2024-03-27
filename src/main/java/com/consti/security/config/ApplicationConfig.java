@@ -1,9 +1,13 @@
 package com.consti.security.config;
 
+import com.consti.security.user.Role;
+import com.consti.security.user.Student;
 import com.consti.security.user.StudentRepository;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +19,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
+
+import static java.time.Month.NOVEMBER;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -24,7 +32,6 @@ public class ApplicationConfig {
     private final StudentRepository studentRepository;
 
     @Bean
-
     public UserDetailsService userDetailsService(){
         return username -> studentRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("User not found"));
@@ -49,4 +56,23 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return args -> {
+            Student Consti = new Student(
+                    1,
+                    "Constantin",
+                    "Wessels",
+                    "Constantin.wessels@web.de",
+                    passwordEncoder().encode("1234"),
+                    0,
+                    LocalDate.of(1998, NOVEMBER, 19),
+                    Role.ADMIN
+            );
+            studentRepository.save(Consti);
+        };
+    }
+
 }

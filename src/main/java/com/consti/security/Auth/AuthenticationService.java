@@ -38,7 +38,7 @@ public class AuthenticationService {
 
         Optional<Student> optionalStudent = repository.findByEmail(request.getEmail());
         if(optionalStudent.isPresent()){
-            return new AuthenticationResponse("Email has been taken, please chose another email and try again");
+            return new AuthenticationResponse("");
         }
 
 

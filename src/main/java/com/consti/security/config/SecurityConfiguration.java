@@ -30,10 +30,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
                                 .requestMatchers("/api/v1/auth/**")
-                                .permitAll()
+                                .permitAll())
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
+                        authorizationManagerRequestMatcherRegistry
+                                .requestMatchers("/api/v1/student-control/**")
+                                .hasAuthority("ADMIN")
                                 .anyRequest()
-                                .authenticated()
-                )
+                                .authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

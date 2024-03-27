@@ -22,11 +22,6 @@ public class StudentController {
     }
 
 
-    @DeleteMapping(path = "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Integer studentId){
-        studentService.deleteStudent(studentId);
-    }
-
     @PutMapping(path = "{studentId}")
     public void updateStudent(
             @PathVariable("studentId") Integer studentId,
