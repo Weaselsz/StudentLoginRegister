@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 
         @ExceptionHandler(Exception.class)
         @ResponseBody
-        public ResponseEntity<String> handleException(Exception ex) {
+        public ResponseEntity<String> handleException() {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
 
