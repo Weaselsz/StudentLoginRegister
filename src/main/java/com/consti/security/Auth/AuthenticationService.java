@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -33,11 +35,18 @@ public class AuthenticationService {
                 .role(Role.STUDENT)
                 .build();
 
+
+        Optional<Student> optionalStudent = repository.findByEmail(request.getEmail());
+        if(optionalStudent.isPresent()){
+            return new AuthenticationResponse("Email has been taken, please chose another email and try again");
+        }
+
+
         repository.save(student);
         var jwtToken = jwtService.generateToken(null, student);
-
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
+
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
