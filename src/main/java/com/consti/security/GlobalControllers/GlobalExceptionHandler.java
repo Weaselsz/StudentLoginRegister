@@ -26,5 +26,10 @@ public class GlobalExceptionHandler {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
         }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> canNotAlterException(IllegalArgumentException ex){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+    }
+
 }
 

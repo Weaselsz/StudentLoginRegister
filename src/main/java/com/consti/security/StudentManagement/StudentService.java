@@ -1,5 +1,6 @@
 package com.consti.security.StudentManagement;
 
+import com.consti.security.user.Role;
 import com.consti.security.user.Student;
 import com.consti.security.user.StudentRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +28,10 @@ public class StudentService {
         if(!exists){
             throw new IllegalStateException(
                     "student with id " + studentId + "does not exist");
+        }
+        if(studentRepository.getReferenceById(studentId).getRole().equals(Role.ADMIN)){
+            throw new IllegalArgumentException(
+                    "student with id " + studentId + " cannot be deleted!");
         }
         studentRepository.deleteById(studentId);
     }
