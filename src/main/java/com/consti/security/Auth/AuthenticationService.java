@@ -38,13 +38,14 @@ public class AuthenticationService {
 
         Optional<Student> optionalStudent = repository.findByEmail(request.getEmail());
         if(optionalStudent.isPresent()){
-            return new AuthenticationResponse("");
+            return new AuthenticationResponse("", "");
         }
 
 
         repository.save(student);
         var jwtToken = jwtService.generateToken(null, student);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+
+        return AuthenticationResponse.builder().token(jwtToken).firstname(student.getFirstname()).build();
     }
 
 
@@ -58,6 +59,6 @@ public class AuthenticationService {
         var student = repository.findByEmail(request.getEmail()).orElseThrow();
 
         var jwtToken = jwtService.generateToken(null, student);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder().token(jwtToken).firstname(student.getFirstname()).build();
     }
 }
