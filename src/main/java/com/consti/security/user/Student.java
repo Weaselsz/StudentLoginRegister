@@ -29,9 +29,11 @@ public class Student implements UserDetails {
     private String lastname;
     private String email;
     private String password;
+    private LocalDate dob;
+
     @Transient
     private Integer age;
-    private LocalDate dob;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

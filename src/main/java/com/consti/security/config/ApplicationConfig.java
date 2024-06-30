@@ -64,10 +64,10 @@ public class ApplicationConfig {
                     1,
                     "Constantin",
                     "Wessels",
-                    "Constantin.wessels@web.de",
+                    "constantin.wessels@web.de",
                     passwordEncoder().encode("1234"),
-                    0,
                     LocalDate.of(1998, NOVEMBER, 19),
+                    0,
                     Role.ADMIN
             );
             studentRepository.save(Consti);

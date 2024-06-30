@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/student-control")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AdminController {
     private final StudentService studentService;
 
