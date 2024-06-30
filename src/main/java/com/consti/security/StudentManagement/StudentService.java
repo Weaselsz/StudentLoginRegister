@@ -36,6 +36,23 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
+    public void changeStudentRole(Integer studentId){
+        boolean exists = studentRepository.existsById(studentId);
+        if(!exists){
+            throw new IllegalStateException(
+                    "Can not alter Students that dont exist");
+        }
+        if(studentRepository.getReferenceById(studentId).getRole().equals(Role.STUDENT)){
+            Student student = studentRepository.getReferenceById(studentId);
+
+            student.setRole(Role.ADMIN);
+        }else{
+            throw new IllegalArgumentException(
+                    "Student is already an Administrator"
+            );
+        }
+    }
+
 
     @Transactional
     public void updateStudent(Integer studentId, String lastname, String firstname, String email){
