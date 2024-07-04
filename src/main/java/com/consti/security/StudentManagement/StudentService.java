@@ -36,6 +36,7 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
+    @Transactional
     public void changeStudentRole(Integer studentId){
         boolean exists = studentRepository.existsById(studentId);
         if(!exists){
@@ -48,7 +49,7 @@ public class StudentService {
             student.setRole(Role.ADMIN);
         }else{
             throw new IllegalArgumentException(
-                    "Student is already an Administrator"
+                    "This User is already an Administrator"
             );
         }
     }

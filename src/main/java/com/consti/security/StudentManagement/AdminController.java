@@ -21,6 +21,12 @@ public class AdminController {
         studentService.deleteStudent(studentId);
     }
 
+    @PatchMapping(path = "{studentId}")
+    public void changeStudentRole(@PathVariable ("studentId") Integer studentId){
+        studentService.changeStudentRole(studentId);
+    }
+
+
     @GetMapping
     public ResponseEntity<String> String(){
         return ResponseEntity.ok("Hello Admin");
