@@ -68,7 +68,7 @@ public class ApplicationConfig {
                     passwordEncoder().encode("1234"),
                     LocalDate.of(1998, NOVEMBER, 19),
                     0,
-                    Role.ADMIN
+                    Role.PROFESSOR
             );
             studentRepository.save(Consti);
         };

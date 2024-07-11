@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
                                 .requestMatchers("/api/v1/student-control/**")
-                                .hasAuthority("ADMIN")
+                                .hasAuthority("PROFESSOR")
                                 .anyRequest()
                                 .authenticated())
                 .httpBasic(Customizer.withDefaults())

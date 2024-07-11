@@ -29,7 +29,7 @@ public class StudentService {
             throw new IllegalStateException(
                     "student with id " + studentId + "does not exist");
         }
-        if(studentRepository.getReferenceById(studentId).getRole().equals(Role.ADMIN)){
+        if(studentRepository.getReferenceById(studentId).getRole().equals(Role.PROFESSOR)){
             throw new IllegalArgumentException(
                     "student with id " + studentId + " cannot be deleted!");
         }
@@ -46,7 +46,7 @@ public class StudentService {
         if(studentRepository.getReferenceById(studentId).getRole().equals(Role.STUDENT)){
             Student student = studentRepository.getReferenceById(studentId);
 
-            student.setRole(Role.ADMIN);
+            student.setRole(Role.PROFESSOR);
         }else{
             throw new IllegalArgumentException(
                     "This User is already an Administrator"
