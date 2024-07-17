@@ -77,6 +77,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<compilerArguments>
+						<source>21</source> <!-- Beispiel für die verwendete Java-Version -->
+						<target>21</target> <!-- Beispiel für die Ziel-Java-Version -->
+					</compilerArguments>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
