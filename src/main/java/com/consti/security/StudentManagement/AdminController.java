@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/student-control")
-@CrossOrigin(origins = "http://vue-frontend:80")
+@CrossOrigin(origins = "*")
 public class AdminController {
     private final StudentService studentService;
 
