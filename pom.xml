@@ -78,8 +78,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<compilerArguments>
-						<source>21</source> <!-- Beispiel für die verwendete Java-Version -->
-						<target>21</target> <!-- Beispiel für die Ziel-Java-Version -->
+						<source>21</source>
+						<target>21</target>
 					</compilerArguments>
 					<excludes>
 						<exclude>
