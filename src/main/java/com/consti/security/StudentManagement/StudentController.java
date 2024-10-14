@@ -1,6 +1,7 @@
 package com.consti.security.StudentManagement;
 
 import com.consti.security.user.Student;
+import com.consti.security.user.StudentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudent(){
+    public List<StudentDTO> getStudent(){
         return studentService.getStudents();
     }
 
@@ -26,9 +27,9 @@ public class StudentController {
     @PutMapping(path = "{studentId}")
     public void updateStudent(
             @PathVariable("studentId") Integer studentId,
-            @RequestParam(required = false) String firstname,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String lastname){
-        studentService.updateStudent(studentId, firstname, lastname, email);
+            @RequestParam(name = "lastname", required = false) String lastname,
+            @RequestParam(name = "firstname", required = false) String firstname,
+            @RequestParam(name = "email", required = false) String email){
+        studentService.updateStudent(studentId, lastname, firstname, email);
     }
 }

@@ -1,5 +1,6 @@
 package com.consti.security.config;
 
+import com.consti.security.StudentManagement.StudentMapper;
 import com.consti.security.user.Role;
 import com.consti.security.user.Student;
 import com.consti.security.user.StudentRepository;
@@ -34,6 +35,11 @@ public class ApplicationConfig {
     public UserDetailsService userDetailsService(){
         return username -> studentRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Bean
+    public StudentMapper studentMapper(){
+        return new StudentMapper();
     }
 
     @Bean

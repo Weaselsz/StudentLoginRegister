@@ -2,6 +2,7 @@ package com.consti.security.StudentManagement;
 
 import com.consti.security.user.Role;
 import com.consti.security.user.Student;
+import com.consti.security.user.StudentDTO;
 import com.consti.security.user.StudentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,19 @@ import java.util.Optional;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
+
     @Autowired
-    public StudentService(StudentRepository studentRepository){
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
+
         this.studentRepository = studentRepository;
-    }
-    public List<Student> getStudents(){
-        return studentRepository.findAll();
+        this.studentMapper = studentMapper;
     }
 
+
+    public List<StudentDTO> getStudents(){
+        return studentRepository.findAll().stream().map(studentMapper::toDTO).toList();
+    }
 
 
     public void deleteStudent(Integer studentId) {
